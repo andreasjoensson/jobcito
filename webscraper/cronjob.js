@@ -1,13 +1,19 @@
-let Indeed = require('./indeed');
-let Glassdoor = require('./glassdoor');
-let ITJobbank = require('./it-jobbank');
-let JobIndex = require('./jobindex');
+const jobindex = require("./scrapers/jobindex");
+const itJobbank = require("./scrapers/it-jobbank");
+const glassdoor = require("./scrapers/glassdoor");
+const indeed = require("./scrapers/indeed");
 
-let CronJob = require('cron').CronJob;
-let jobs = new CronJob('0 23 * * *', function () {
-    Indeed()
-    Glassdoor()
-    ITJobbank()
-    JobIndex()
-},null, true, 'Europe/Copenhagen');
+let CronJob = require("cron").CronJob;
+let jobs = new CronJob(
+  "0 23 * * *",
+  function () {
+    jobindex();
+    itJobbank();
+    glassdoor();
+    indeed();
+  },
+  null,
+  true,
+  "Europe/Copenhagen"
+);
 jobs.start();
