@@ -1,0 +1,25 @@
+.search-jobs-input {
+  border-radius: 35px;
+  border: none;
+  background-color: white;
+}
+
+.line-break {
+  width: 1px;
+  background-color: #cecece;
+}
+
+.search-input {
+  border: none;
+  width: 185px;
+}
+
+.search-button {
+  height: 100%;
+  width: 140px;
+  box-shadow: none;
+  border: none;
+  background-color: #2524d1;
+  color: white;
+  border-radius: 35px;
+}
