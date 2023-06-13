@@ -21,56 +21,56 @@ export default function CategoryShowcase() {
       ref={containerRef}
       onWheel={handleScroll}
     >
-      <Badge bg="light" text="dark">
+      <Badge bg="white" text="dark">
         Fullstack
       </Badge>
-      <Badge bg="light" text="dark">
+      <Badge bg="white" text="dark">
         Machine Learning
       </Badge>
-      <Badge bg="light" text="dark">
+      <Badge bg="white" text="dark">
         Senior Developer
       </Badge>
-      <Badge bg="light" text="dark">
+      <Badge bg="white" text="dark">
         Junior Developer
       </Badge>
-      <Badge bg="light" text="dark">
+      <Badge bg="white" text="dark">
         Frontend
       </Badge>
-      <Badge bg="light" text="dark">
+      <Badge bg="white" text="dark">
         Backend
       </Badge>
-      <Badge bg="light" text="dark">
+      <Badge bg="white" text="dark">
         Cloud
       </Badge>
 
-      <Badge bg="light" text="dark">
+      <Badge bg="white" text="dark">
         Fullstack
       </Badge>
-      <Badge bg="light" text="dark">
+      <Badge bg="white" text="dark">
         .NET
       </Badge>
-      <Badge bg="light" text="dark">
+      <Badge bg="white" text="dark">
         Java
       </Badge>
-      <Badge bg="light" text="dark">
+      <Badge bg="white" text="dark">
         Python
       </Badge>
-      <Badge bg="light" text="dark">
+      <Badge bg="white" text="dark">
         C#
       </Badge>
-      <Badge bg="light" text="dark">
+      <Badge bg="white" text="dark">
         Embedded systems
       </Badge>
-      <Badge bg="light" text="dark">
+      <Badge bg="white" text="dark">
         React
       </Badge>
-      <Badge bg="light" text="dark">
+      <Badge bg="white" text="dark">
         Next JS
       </Badge>
-      <Badge bg="light" text="dark">
+      <Badge bg="white" text="dark">
         Angular
       </Badge>
-      <Badge bg="light" text="dark">
+      <Badge bg="white" text="dark">
         Vue
       </Badge>
     </div>

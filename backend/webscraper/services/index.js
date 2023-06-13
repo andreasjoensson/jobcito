@@ -33,7 +33,7 @@ const getAllJobs = async () => {
 const filterJobsByCategory = (category, jobs) => {
   return jobs.filter((job) => {
     let Regex = new RegExp(category, "gi");
-    return job.Titel.match(Regex);
+    return job.title.match(Regex);
   });
 };
 

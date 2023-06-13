@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer");
-const client = require("./client/index.js");
+const client = require(".././client/index.js");
 const { promisify } = require("util");
 const setAsync = promisify(client.set).bind(client);
 
@@ -15,14 +15,20 @@ module.exports = (async () => {
 
     let jobs = await page.evaluate(() =>
       Array.from(document.querySelectorAll(".PaidJob")).map((jobs) => ({
-        Virksomhed: jobs.querySelector("p > a").innerText,
-        Lokation: jobs
+        company: jobs.querySelector("p > a").innerText,
+        logo: jobs.querySelector("a > img")
+          ? jobs.querySelector("a > img").src
+          : null,
+        location: jobs
           .querySelector(" p")
           .innerText.split(",")
           .splice(1, 1)
           .toString(),
-        Titel: jobs.querySelector("a > b").innerText,
-        Link: jobs.querySelector("a").href,
+        title: jobs.querySelector("a > b").innerText,
+        postedAt: jobs.querySelector(
+          ".jix_toolbar > div:nth-child(1) > div:nth-child(2) > time:nth-child(1)"
+        ).innerText,
+        applyLink: jobs.querySelector(".jix_toolbar .btn-primary").href,
       }))
     );
     // Skal man afslutte recursion

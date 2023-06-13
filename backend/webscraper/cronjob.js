@@ -10,7 +10,6 @@ let jobs = new CronJob(
     jobindex();
     itJobbank();
     glassdoor();
-    indeed();
   },
   null,
   true,

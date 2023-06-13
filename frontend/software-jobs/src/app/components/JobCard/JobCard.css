@@ -1,0 +1,35 @@
+.job-title {
+  font-weight: bold;
+}
+
+.job-title-container > p {
+  margin: 0px;
+}
+
+.job-container:hover {
+  background-color: #edf0ef;
+  border-radius: 25px;
+  border: none;
+}
+
+.location-text {
+  font-weight: bold;
+}
+
+.created-at-text {
+  font-weight: 400;
+  color: rgb(181, 181, 181);
+}
+
+.purple-btn {
+  background-color: #2825c5;
+}
+
+.job-intro-container {
+  width: 25%;
+}
+
+.job-logo {
+  max-width: 50px;
+  object-fit: contain;
+}

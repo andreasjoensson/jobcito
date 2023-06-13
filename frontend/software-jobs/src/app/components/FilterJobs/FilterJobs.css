@@ -1,0 +1,27 @@
+.filter-list {
+  list-style: none;
+}
+
+.filter-text {
+  margin: 0px;
+}
+
+.filter-checkbox {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-right: 4px;
+  padding-left: 4px;
+}
+
+.dropdown-btn {
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.btn-check:checked + .btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check) + .btn:active {
+  background-color: #2825c5;
+}

@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer");
-const client = require("./client/index.js");
+const client = require(".././client/index.js");
 const { promisify } = require("util");
 const setAsync = promisify(client.set).bind(client);
 
@@ -14,10 +14,12 @@ module.exports = (async () => {
       Array.from(
         document.querySelectorAll("#mosaic-provider-jobcards > a")
       ).map((jobs) => ({
-        Titel: jobs.querySelector(".jobTitle").innerText,
-        Link: jobs.href,
-        Lokation: jobs.querySelector(".companyLocation").innerText,
-        Virksomhed: jobs.querySelector(".companyName").innerText,
+        title: jobs.querySelector(".jobTitle").innerText,
+        applyLink: jobs.href,
+        logo: null,
+        postedAt: jobs.querySelector(".date").innerText,
+        location: jobs.querySelector(".companyLocation").innerText,
+        company: jobs.querySelector(".companyName").innerText,
       }))
     );
 

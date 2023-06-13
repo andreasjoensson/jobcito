@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer");
-const client = require("../client/index.js");
+const client = require(".././client/index.js");
 const { promisify } = require("util");
 const setAsync = promisify(client.set).bind(client);
 
@@ -14,12 +14,14 @@ module.exports = (async () => {
       Array.from(
         document.querySelectorAll("#PanesWrap > #MainCol > div > .hover > li")
       ).map((jobs) => ({
-        Virksomhed: jobs
+        logo: null,
+        company: jobs
           .querySelector("div div a div div div:nth-child(2)")
           .innerHTML.split("<")[0],
-        Link: jobs.querySelector("div div a").href,
-        Titel: jobs.querySelector("div div a div > .job-title").innerText,
-        Lokation: jobs.querySelector("div div a div > .location").innerText,
+        applyLink: jobs.querySelector("div div a").href,
+        title: jobs.querySelector("div div a div > .job-title").innerText,
+        location: jobs.querySelector("div div a div > .location").innerText,
+        postedAt: jobs.querySelector("div div a > div:nth-child(2)").innerText,
       }))
     );
 

@@ -9,7 +9,7 @@ export default function Header() {
   return (
     <Navbar collapseOnSelect expand="lg">
       <Container fluid={true} className="p-3 px-5">
-        <Navbar.Brand href="#home">
+        <Navbar.Brand className="me-3" href="#home">
           <Image
             src="/logo.png"
             width="30"

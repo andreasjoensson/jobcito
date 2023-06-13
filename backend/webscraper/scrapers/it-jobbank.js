@@ -1,6 +1,6 @@
 const puppeteer = require("puppeteer");
 const { promisify } = require("util");
-const client = require("./client/index.js");
+const client = require(".././client/index.js");
 const setAsync = promisify(client.set).bind(client);
 
 module.exports = (async () => {
@@ -13,12 +13,16 @@ module.exports = (async () => {
     let jobs = await page.evaluate(() =>
       Array.from(document.querySelectorAll(".jobsearch-result")).map(
         (jobs) => ({
-          Virksomhed: jobs.querySelector(".job-company").textContent,
-          Titel: jobs.querySelector(".job-title > a").textContent,
-          Lokation: jobs.querySelector(".job-location")
+          company: jobs.querySelector(".job-company").textContent,
+          title: jobs.querySelector(".job-title > a").textContent,
+          logo: jobs.querySelector(".company-logo")
+            ? jobs.querySelector(".company-logo").src
+            : null,
+          location: jobs.querySelector(".job-location")
             ? jobs.querySelector(".job-location").textContent
             : "No data",
-          Link: jobs.querySelector(".job-title > a").href,
+          applyLink: jobs.querySelector(".job-title > a").href,
+          postedAt: null,
         })
       )
     );
