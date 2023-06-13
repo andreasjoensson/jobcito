@@ -35,8 +35,9 @@ export default function JobList({ jobs }) {
 
   return (
     <div className="pe-4">
-      {currentJobs.map((job) => (
+      {currentJobs.map((job, i) => (
         <JobCard
+          key={i}
           logo={job.logo}
           title={job.title}
           company={job.company}
@@ -48,8 +49,9 @@ export default function JobList({ jobs }) {
 
       <Pagination className="mt-5">
         <Pagination.Prev disabled={currentPage == 1} onClick={prevPage} />
-        {pages.map((page) => (
+        {pages.map((page, i) => (
           <Pagination.Item
+            key={i}
             color="#2524D1"
             active={currentPage == page}
             onClick={() => changePage(page)}

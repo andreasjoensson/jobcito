@@ -4,12 +4,24 @@ import { Container, Button } from "react-bootstrap";
 import "./Banner.css";
 import { AiOutlineSearch } from "react-icons/ai";
 import { HiOutlineLocationMarker } from "react-icons/hi";
+import { useState } from "react";
 
-export default function Banner() {
+interface BannerProps {
+  filterByLocAndCat: (location: string, category: string) => void;
+}
+
+export default function Banner({ filterByLocAndCat }: BannerProps) {
+  const [location, setLocation] = useState("");
+  const [category, setCategory] = useState("");
+
+  const filterJobs = () => {
+    filterByLocAndCat(location, category);
+  };
+
   return (
     <Container className="p-4 px-5" fluid={true}>
       <div className="banner mt-3">
-        <h1>Find your dream job here!</h1>
+        <h1>Find dit drømme job her!</h1>
       </div>
 
       <div className="search-jobs mt-4">
@@ -22,6 +34,8 @@ export default function Banner() {
             />
             <input
               type="text"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
               placeholder="Job title or keyword"
               className="search-input p-3 ms-2"
             />
@@ -35,12 +49,16 @@ export default function Banner() {
             />
             <input
               type="text"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
               placeholder="Add country or city"
               className="search-input p-3 ms-2"
             />
           </div>
           <div className="search-button-container ms-auto">
-            <button className="search-button">Search</button>
+            <button className="search-button" onClick={filterJobs}>
+              Search
+            </button>
           </div>
         </div>
       </div>

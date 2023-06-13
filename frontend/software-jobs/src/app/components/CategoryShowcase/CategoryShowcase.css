@@ -13,3 +13,13 @@
   border: 1px solid rgb(156, 156, 156);
   cursor: pointer;
 }
+
+.badge {
+  color: black;
+}
+
+.bg-blue {
+  background-color: #2524d1;
+  color: #fff;
+  border: none;
+}

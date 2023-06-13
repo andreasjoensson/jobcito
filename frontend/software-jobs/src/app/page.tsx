@@ -2,50 +2,116 @@
 import Banner from "./components/Banner/Banner";
 import CategoryShowcase from "./components/CategoryShowcase/CategoryShowcase";
 import FilterJobs from "./components/FilterJobs/FilterJobs";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import JobList from "./components/JobList/JobList";
 import "./page.css";
 import instance from "./axios/api_instance";
 import { useState, useEffect } from "react";
 
-export default async function Page() {
-  const [jobs, setJobs] = useState(null);
+interface Job {
+  logo: null | string;
+  company: string;
+  applyLink: string;
+  title: string;
+  location: string;
+  postedAt: string;
+}
+
+export default function Page() {
+  const [jobs, setJobs] = useState<Job[] | null>(null);
   const [isLoading, setLoading] = useState(false);
 
-  const filterJobs = async (category: String) => {
-    const filteredJobs = await getFilteredJobs(category);
+  const filterJobs = async (category: string) => {
+    setLoading(true);
+    try {
+      const filteredJobs = await getFilteredJobs(category);
+      setJobs(filteredJobs);
+    } catch (error) {
+      console.error("Error fetching jobs:", error);
+      setJobs([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const filterExistingJobs = (search: string) => {
+    const lowercaseSearch = search.toLowerCase().trim();
+    const filteredJobs = jobs.filter(
+      (job) =>
+        job.location.toLowerCase().includes(lowercaseSearch) ||
+        job.title.toLowerCase().includes(lowercaseSearch) ||
+        job.company.toLowerCase().includes(lowercaseSearch)
+    );
     console.log("filteredJobs", filteredJobs);
     setJobs(filteredJobs);
   };
 
-  useEffect(() => {
+  const filterFromLocationAndCategory = async (
+    location: string,
+    category: string
+  ) => {
     setLoading(true);
-    const fetchData = async () => {
-      const jobs = await getJobs();
-      setJobs(jobs);
+    try {
+      let filteredJobs = await getJobs();
+
+      if (category) {
+        filteredJobs = await getFilteredJobs(category);
+      }
+
+      if (location) {
+        filteredJobs = filteredJobs.filter(
+          (job: Job) => job.location === location
+        );
+      }
+
+      setJobs(filteredJobs);
+    } catch (error) {
+      console.error("Error fetching jobs:", error);
+      setJobs([]);
+    } finally {
       setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const fetchedJobs = await getJobs();
+        setJobs(fetchedJobs);
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
+        setJobs([]);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchData();
   }, []);
-
-  if (isLoading) return <p>Loading...</p>;
-  if (!jobs) return <p>No profile data</p>;
 
   return (
     <div>
       <div className="banner-header pb-4">
         <Header />
-        <Banner />
+        <Banner filterByLocAndCat={filterFromLocationAndCategory} />
       </div>
       <CategoryShowcase filter={filterJobs} />
       <div className="row mt-5">
         <div className="col-2">
           <div className="filter-container">
-            <FilterJobs />
+            <FilterJobs filter={filterExistingJobs} />
           </div>
         </div>
         <div className="col-10">
-          {isLoading ? <p>loadding...</p> : <JobList jobs={jobs} />}
+          {isLoading && (
+            <div className="d-flex justify-content-center">
+              <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          )}
+
+          {jobs && !isLoading ? <JobList jobs={jobs} /> : null}
         </div>
       </div>
     </div>
@@ -56,7 +122,6 @@ export async function getJobs() {
   try {
     const response = await instance.get("/api/jobs"); // Replace with your API endpoint
     const jobs = response.data; // Assuming your API response is an array of jobs
-    console.log("response", response.data);
 
     return jobs;
   } catch (error) {
@@ -73,7 +138,6 @@ export async function getFilteredJobs(category: String) {
       },
     }); // Replace with your API endpoint
     const jobs = response.data; // Assuming your API response is an array of jobs
-    console.log("response", response.data);
 
     return jobs;
   } catch (error) {

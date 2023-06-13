@@ -7,7 +7,7 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { SlArrowUp, SlArrowDown } from "react-icons/sl";
 import "./FilterJobs.css";
 
-export default function FilterJobs() {
+export default function FilterJobs({ filter }) {
   const [fullTime, setFulltime] = useState(false);
   const [seniorLevel, setSeniorLevel] = useState(false);
   const [remote, setRemote] = useState(false);
@@ -61,12 +61,22 @@ export default function FilterJobs() {
     }
   };
 
+  const filterList = (e) => {
+    e.preventDefault();
+    const filterText = e.target.value.toLowerCase();
+    filter(filterText);
+  };
+
   return (
     <div className="container px-4">
       <Form>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Label className="fw-bold">Filter</Form.Label>
-          <Form.Control type="text" placeholder="Company,skill,tag..." />
+          <Form.Control
+            type="text"
+            onChange={(e) => filterList(e)}
+            placeholder="Company,skill,tag..."
+          />
         </Form.Group>
       </Form>
 

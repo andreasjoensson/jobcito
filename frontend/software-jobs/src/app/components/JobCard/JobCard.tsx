@@ -67,9 +67,13 @@ export default function Job({
 
         <div className="apply-link">
           <div className="apply-link-button">
-            <button type="button" className="btn btn-primary purple-btn">
+            <a
+              className="btn btn-primary purple-btn"
+              target="_blank"
+              href={applyLink}
+            >
               Ansøg
-            </button>
+            </a>
           </div>
         </div>
       </div>

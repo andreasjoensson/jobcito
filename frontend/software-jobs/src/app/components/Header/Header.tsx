@@ -27,10 +27,7 @@ export default function Header() {
             <Nav.Link href="#aboutus">About Us</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">Ik sagsøg mig</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-              Dank memes
-            </Nav.Link>
+            <Nav.Link href="#iksagsøgmig">Ik sagsøg mig</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
