@@ -1,10 +1,41 @@
+"use client";
 import React from "react";
 import JobCard from "../JobCard/JobCard";
+import { useState } from "react";
+import Pagination from "react-bootstrap/Pagination";
 
 export default function JobList({ jobs }) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const pages = Array.from(
+    { length: jobs.length / 9 },
+    (_, index) => index + 1
+  );
+  const [currentJobs, setCurrentJobs] = useState(jobs.slice(0, 9));
+
+  const nextPage = () => {
+    if (currentPage < pages.length) {
+      setCurrentPage(currentPage + 1);
+      setCurrentJobs(jobs.slice(currentPage * 9, currentPage * 9 + 9));
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+      setCurrentJobs(
+        jobs.slice((currentPage - 2) * 9, (currentPage - 2) * 9 + 9)
+      );
+    }
+  };
+
+  const changePage = (page) => {
+    setCurrentPage(page);
+    setCurrentJobs(jobs.slice((page - 1) * 9, (page - 1) * 9 + 9));
+  };
+
   return (
     <div className="pe-4">
-      {jobs.map((job) => (
+      {currentJobs.map((job) => (
         <JobCard
           logo={job.logo}
           title={job.title}
@@ -14,6 +45,23 @@ export default function JobList({ jobs }) {
           applyLink={job.applyLink}
         />
       ))}
+
+      <Pagination className="mt-5">
+        <Pagination.Prev disabled={currentPage == 1} onClick={prevPage} />
+        {pages.map((page) => (
+          <Pagination.Item
+            color="#2524D1"
+            active={currentPage == page}
+            onClick={() => changePage(page)}
+          >
+            {page}
+          </Pagination.Item>
+        ))}
+        <Pagination.Next
+          disabled={currentPage == pages[pages.length - 1]}
+          onClick={nextPage}
+        />
+      </Pagination>
     </div>
   );
 }
