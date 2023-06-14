@@ -3,6 +3,7 @@ import React from "react";
 import "./JobCard.css";
 import Badge from "react-bootstrap/Badge";
 import Image from "next/image";
+import { MdOutlineNotInterested } from "react-icons/md";
 
 interface JobProps {
   logo: string;
@@ -26,13 +27,17 @@ export default function Job({
       <div className="job-container p-3 d-flex align-items-center justify-content-between">
         <div className="job-intro-container d-flex align-items-center">
           <div className="job-logo me-4">
-            <Image
-              src={logo ? logo : "/logo.png"}
-              alt="Firmalogo"
-              width={50}
-              height={50}
-              className="job-logo"
-            />
+            {logo ? (
+              <Image
+                src={logo}
+                alt="Firmalogo"
+                width={50}
+                height={50}
+                className="job-logo"
+              />
+            ) : (
+              <MdOutlineNotInterested size={50} />
+            )}
           </div>
           <div className="job-title-container">
             <span className="job-title">
