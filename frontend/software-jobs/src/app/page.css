@@ -1,9 +1,0 @@
-.banner-header {
-  background-image: url("/bannertre.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  position: relative;
-  z-index: 1;
-}
