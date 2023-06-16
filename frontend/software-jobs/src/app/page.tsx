@@ -96,13 +96,13 @@ export default function Page() {
         <Banner filterByLocAndCat={filterFromLocationAndCategory} />
       </div>
       <CategoryShowcase filter={filterJobs} />
-      <div className="row mt-5">
-        <div className="col-2">
+      <div className="row jobs-container mt-5">
+        <div className="col-xs-12 col-sm-12 col-md-2">
           <div className="filter-container">
             <FilterJobs filter={filterExistingJobs} />
           </div>
         </div>
-        <div className="col-10">
+        <div className="col-xs-12 col-sm-12 col-md-10">
           {isLoading && (
             <div className="d-flex justify-content-center">
               <div className="spinner-border text-primary" role="status">

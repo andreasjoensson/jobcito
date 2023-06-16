@@ -70,7 +70,7 @@ export default function FilterJobs({ filter }) {
   };
 
   return (
-    <div className="container px-4">
+    <div className="container job-filter-container px-4">
       <Form>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Label className="fw-bold">Filter</Form.Label>

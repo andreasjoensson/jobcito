@@ -1,0 +1,6 @@
+@media only screen and (max-width: 768px) {
+  .jobs-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
