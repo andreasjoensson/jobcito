@@ -15,12 +15,12 @@ module.exports = (async () => {
 
     let jobs = await page.evaluate(() =>
       Array.from(document.querySelectorAll(".PaidJob")).map((jobs) => {
-        jobs.querySelector("p > a").click();
         return {
           company: jobs.querySelector("p > a").innerText,
           logo: jobs.querySelector("a > img")
             ? jobs.querySelector("a > img").src
             : null,
+          description: jobs.querySelector(".PaidJob-inner").innerText,
           location: jobs
             .querySelector(" p")
             .innerText.split(",")
@@ -39,7 +39,7 @@ module.exports = (async () => {
       return jobs;
     } else {
       const nextPageNumber = parseInt(url.match(/page=(\d+)$/)[1], 10) + 1;
-      if (nextPageNumber == 18) {
+      if (nextPageNumber == 28) {
         return jobs;
       }
       const nextUrl = `https://www.jobindex.dk/jobsoegning/it/systemudvikling?page=${nextPageNumber}`;

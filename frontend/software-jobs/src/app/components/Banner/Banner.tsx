@@ -36,7 +36,7 @@ export default function Banner({ filterByLocAndCat }: BannerProps) {
               type="text"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              placeholder="Job title or keyword"
+              placeholder="Job titel eller søgeord"
               className="search-input p-3 ms-2"
             />
           </div>
@@ -51,13 +51,13 @@ export default function Banner({ filterByLocAndCat }: BannerProps) {
               type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              placeholder="Add country or city"
+              placeholder="Indtast by"
               className="search-input p-3 ms-2"
             />
           </div>
           <div className="search-button-container ms-auto">
             <button className="search-button" onClick={filterJobs}>
-              Search
+              Søg
             </button>
           </div>
         </div>

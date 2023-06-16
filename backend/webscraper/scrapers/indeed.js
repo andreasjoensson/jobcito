@@ -12,7 +12,7 @@ module.exports = (async () => {
 
     const jobs = await page.evaluate(() =>
       Array.from(
-        document.querySelectorAll("#mosaic-provider-jobcards > a")
+        document.querySelectorAll("#mosaic-provider-jobcards > ul > li")
       ).map((jobs) => ({
         title: jobs.querySelector(".jobTitle").innerText,
         applyLink: jobs.href,

@@ -30,24 +30,17 @@ export default function Header() {
             </Nav.Link>
             <Nav.Link
               className="p-4"
-              href="/arbejdsgivere"
-              active={pathname === "/arbejdsgivere"}
+              href="/artikler"
+              active={pathname === "/artikler"}
             >
-              Employers
+              Artikler
             </Nav.Link>
             <Nav.Link
               className="p-4"
-              href="/uploadjob"
-              active={pathname === "/uploadjob"}
+              href="/kontakt"
+              active={pathname === "/kontakt"}
             >
-              Upload Job
-            </Nav.Link>
-            <Nav.Link
-              className="p-4"
-              href="/donationer"
-              active={pathname === "/donationer"}
-            >
-              Donationer
+              Kontakt
             </Nav.Link>
           </Nav>
           <Nav>

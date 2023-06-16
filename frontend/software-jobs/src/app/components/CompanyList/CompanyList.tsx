@@ -1,52 +1,47 @@
 "use client";
 import React from "react";
-import JobCard from "../JobCard/JobCard";
+import "./companylist.css";
+import CompanyCard from "../CompanyCard.tsx/CompanyCard";
 import { useState } from "react";
 import Pagination from "react-bootstrap/Pagination";
 
-export default function JobList({ jobs }) {
+export default function CompanyList({ companies }) {
   const [currentPage, setCurrentPage] = useState(1);
   const pages = Array.from(
-    { length: jobs.length / 9 },
+    { length: companies.length / 9 },
     (_, index) => index + 1
   );
-  const [currentJobs, setCurrentJobs] = useState(jobs.slice(0, 9));
+  const [currentcompanies, setCurrentcompanies] = useState(
+    companies.slice(0, 9)
+  );
 
   const nextPage = () => {
     if (currentPage < pages.length) {
       setCurrentPage(currentPage + 1);
-      setCurrentJobs(jobs.slice(currentPage * 9, currentPage * 9 + 9));
+      setCurrentcompanies(
+        companies.slice(currentPage * 9, currentPage * 9 + 9)
+      );
     }
   };
 
   const prevPage = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
-      setCurrentJobs(
-        jobs.slice((currentPage - 2) * 9, (currentPage - 2) * 9 + 9)
+      setCurrentcompanies(
+        companies.slice((currentPage - 2) * 9, (currentPage - 2) * 9 + 9)
       );
     }
   };
 
   const changePage = (page) => {
     setCurrentPage(page);
-    setCurrentJobs(jobs.slice((page - 1) * 9, (page - 1) * 9 + 9));
+    setCurrentcompanies(companies.slice((page - 1) * 9, (page - 1) * 9 + 9));
   };
 
   return (
     <div className="pe-4">
-      {currentJobs.map((job, i) => (
-        <JobCard
-          key={i}
-          logo={job.logo}
-          title={job.title}
-          company={job.company}
-          location={job.location}
-          postedAt={job.postedAt}
-          applyLink={job.applyLink}
-          tags={job.tags}
-          description={job.description}
-        />
+      {currentcompanies.map((company, i) => (
+        <CompanyCard key={i} name={company.name} logo={company.logo} />
       ))}
 
       <Pagination className="mt-5">

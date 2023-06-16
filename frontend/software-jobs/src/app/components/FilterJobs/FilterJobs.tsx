@@ -15,6 +15,8 @@ export default function FilterJobs({ filter }) {
   const [chosenSpecialties, setChosenSpecialties] = useState<string[]>([]);
   const [showEmploymentDropdown, setShowEmploymentDropdown] = useState(true);
   const [showSpecialityDropdown, setShowSpecialityDropdown] = useState(false);
+  const [showRemoteDropdown, setShowRemoteDropdown] = useState(true);
+  const [showSeniorityDropdown, setShowSeniorityDropdown] = useState(true);
   const specialties = [
     "Java",
     "JavaScript",
@@ -122,7 +124,7 @@ export default function FilterJobs({ filter }) {
       ) : null}
 
       <h6 className="mt-5 fw-bold">
-        Employment{" "}
+        Ansættelse{" "}
         {showEmploymentDropdown ? (
           <SlArrowUp
             onClick={() => setShowEmploymentDropdown(false)}
@@ -152,7 +154,7 @@ export default function FilterJobs({ filter }) {
               {fullTime ? <AiOutlineCheck /> : <span className="p-2"></span>}
             </ToggleButton>
 
-            <p className="filter-text ms-2">Fulltime</p>
+            <p className="filter-text ms-2">Fuldtid</p>
           </li>
 
           <li key={2} className="mt-3 d-flex mb-3 align-items-center">
@@ -169,10 +171,27 @@ export default function FilterJobs({ filter }) {
               {seniorLevel ? <AiOutlineCheck /> : <span className="p-2"></span>}
             </ToggleButton>
 
-            <p className="filter-text ms-2">Senior level</p>
+            <p className="filter-text ms-2">Deltid</p>
           </li>
 
-          <li key={3} className="mt-3 d-flex align-items-center">
+          <li key={3} className="mt-3 d-flex mb-3 align-items-center">
+            <ToggleButton
+              className="filter-checkbox"
+              id="toggle-seniorlevel"
+              type="checkbox"
+              variant="outline-primary"
+              size="sm"
+              checked={seniorLevel}
+              value="1"
+              onChange={(e) => setSeniorLevel(e.currentTarget.checked)}
+            >
+              {seniorLevel ? <AiOutlineCheck /> : <span className="p-2"></span>}
+            </ToggleButton>
+
+            <p className="filter-text ms-2">Freelance/kontrakt</p>
+          </li>
+
+          <li key={4} className="mt-3 d-flex align-items-center">
             <ToggleButton
               className="filter-checkbox"
               id="toggle-remote"
@@ -185,7 +204,130 @@ export default function FilterJobs({ filter }) {
             >
               {remote ? <AiOutlineCheck /> : <span className="p-2"></span>}
             </ToggleButton>
-            <p className="filter-text ms-2">Remote</p>
+            <p className="filter-text ms-2">Intern</p>
+          </li>
+        </ul>
+      ) : null}
+
+      <h6 className="mt-5 fw-bold">
+        Remote/fjernarbejde{" "}
+        {showEmploymentDropdown ? (
+          <SlArrowUp
+            onClick={() => setShowEmploymentDropdown(false)}
+            className="dropdown-btn"
+          />
+        ) : (
+          <SlArrowDown
+            onClick={() => setShowEmploymentDropdown(true)}
+            className="dropdown-btn"
+          />
+        )}
+      </h6>
+
+      {showRemoteDropdown ? (
+        <ul className="filter-list mt-3 p-0">
+          <li key={1} className="d-flex mb-3 align-items-center">
+            <ToggleButton
+              className="filter-checkbox"
+              id="toggle-fulltime"
+              type="checkbox"
+              variant="outline-primary"
+              checked={fullTime}
+              size="sm"
+              value="1"
+              onChange={(e) => setFulltime(e.currentTarget.checked)}
+            >
+              {fullTime ? <AiOutlineCheck /> : <span className="p-2"></span>}
+            </ToggleButton>
+
+            <p className="filter-text ms-2">Yes</p>
+          </li>
+
+          <li key={2} className="mt-3 d-flex mb-3 align-items-center">
+            <ToggleButton
+              className="filter-checkbox"
+              id="toggle-seniorlevel"
+              type="checkbox"
+              variant="outline-primary"
+              size="sm"
+              checked={seniorLevel}
+              value="1"
+              onChange={(e) => setSeniorLevel(e.currentTarget.checked)}
+            >
+              {seniorLevel ? <AiOutlineCheck /> : <span className="p-2"></span>}
+            </ToggleButton>
+
+            <p className="filter-text ms-2">No</p>
+          </li>
+        </ul>
+      ) : null}
+
+      <h6 className="mt-5 fw-bold">
+        Erfaring{" "}
+        {showEmploymentDropdown ? (
+          <SlArrowUp
+            onClick={() => setShowEmploymentDropdown(false)}
+            className="dropdown-btn"
+          />
+        ) : (
+          <SlArrowDown
+            onClick={() => setShowEmploymentDropdown(true)}
+            className="dropdown-btn"
+          />
+        )}
+      </h6>
+
+      {showSeniorityDropdown ? (
+        <ul className="filter-list mt-3 p-0">
+          <li key={1} className="d-flex mb-3 align-items-center">
+            <ToggleButton
+              className="filter-checkbox"
+              id="toggle-fulltime"
+              type="checkbox"
+              variant="outline-primary"
+              checked={fullTime}
+              size="sm"
+              value="1"
+              onChange={(e) => setFulltime(e.currentTarget.checked)}
+            >
+              {fullTime ? <AiOutlineCheck /> : <span className="p-2"></span>}
+            </ToggleButton>
+
+            <p className="filter-text ms-2">Senior</p>
+          </li>
+
+          <li key={2} className="mt-3 d-flex mb-3 align-items-center">
+            <ToggleButton
+              className="filter-checkbox"
+              id="toggle-seniorlevel"
+              type="checkbox"
+              variant="outline-primary"
+              size="sm"
+              checked={seniorLevel}
+              value="1"
+              onChange={(e) => setSeniorLevel(e.currentTarget.checked)}
+            >
+              {seniorLevel ? <AiOutlineCheck /> : <span className="p-2"></span>}
+            </ToggleButton>
+
+            <p className="filter-text ms-2">Junior</p>
+          </li>
+
+          <li key={3} className="mt-3 d-flex mb-3 align-items-center">
+            <ToggleButton
+              className="filter-checkbox"
+              id="toggle-seniorlevel"
+              type="checkbox"
+              variant="outline-primary"
+              size="sm"
+              checked={seniorLevel}
+              value="1"
+              onChange={(e) => setSeniorLevel(e.currentTarget.checked)}
+            >
+              {seniorLevel ? <AiOutlineCheck /> : <span className="p-2"></span>}
+            </ToggleButton>
+
+            <p className="filter-text ms-2">Ikke skrevet</p>
           </li>
         </ul>
       ) : null}

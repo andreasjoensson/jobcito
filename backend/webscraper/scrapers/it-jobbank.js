@@ -18,6 +18,7 @@ module.exports = (async () => {
           logo: jobs.querySelector(".company-logo")
             ? jobs.querySelector(".company-logo").src
             : null,
+          description: jobs.querySelector(".job-body").textContent,
           location: jobs.querySelector(".job-location")
             ? jobs.querySelector(".job-location").textContent
             : "No data",

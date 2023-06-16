@@ -6,12 +6,19 @@ import Image from "next/image";
 import { MdOutlineNotInterested } from "react-icons/md";
 
 interface JobProps {
-  logo: string;
-  title: string;
+  logo: string | null;
   company: string;
+  applyLink: string;
+  title: string;
   location: string;
   postedAt: string;
-  applyLink: string;
+  description: string;
+  tags: {
+    skills: string[];
+    time: string;
+    seniority: string | null;
+    remote: boolean | null;
+  };
 }
 
 export default function Job({
@@ -21,6 +28,8 @@ export default function Job({
   location,
   postedAt,
   applyLink,
+  tags,
+  description,
 }: JobProps) {
   return (
     <div>
@@ -50,15 +59,15 @@ export default function Job({
         </div>
 
         <div className="badges-jobs">
-          <Badge className="me-2" bg="light" text="dark">
-            Fullstack
-          </Badge>
-          <Badge className="me-2" bg="light" text="dark">
-            Machine Learning
-          </Badge>
-          <Badge bg="light" text="dark">
-            Senior Developer
-          </Badge>
+          {tags.skills ? (
+            <div>
+              {tags.skills.map((skill, index) => (
+                <Badge key={index} bg="light" text="dark" className="me-2">
+                  {skill}
+                </Badge>
+              ))}
+            </div>
+          ) : null}
         </div>
         <div className="location">
           <p className="location-text">{location ? location : "Not known.."}</p>

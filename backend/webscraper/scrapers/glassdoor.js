@@ -1,22 +1,34 @@
 const puppeteer = require("puppeteer");
 const client = require(".././client/index.js");
 const { promisify } = require("util");
-const { getTagsFromJobDescription } = require("../services/tagRecognizing.js");
 const setAsync = promisify(client.set).bind(client);
 
 module.exports = (async () => {
-  async function getJob(url) {
-    const page = await browser.newPage();
-    await page.setDefaultNavigationTimeout(0);
-    await page.setViewport({ width: 1280, height: 720 });
-    await page.goto(url, { waitUntil: "load", timeout: 0 });
+  const browser = await puppeteer.launch({
+    headless: false,
+    timeout: 0,
+    protocolTimeout: 12540000,
+  });
+  const page = await browser.newPage(); // Create a new page instance
 
-    await page.exposeFunction("get_tags", getTagsFromJobDescription);
+  async function getJob(url, next) {
+    await page.setViewport({ width: 1280, height: 1220 });
+
+    if (!next) {
+      await page.goto(url, { waitUntil: "load", timeout: 0 });
+    }
+
+    if (next) {
+      await page.waitForSelector(".nextButton", { visible: true });
+      await page.click(".nextButton");
+      await new Promise((resolve) => setTimeout(resolve, 3300)); // Wait for the jobs to load
+    }
 
     const jobs = await page.evaluate(async () => {
       const jobElements = Array.from(
         document.querySelectorAll("#PanesWrap > #MainCol > div > .hover > li")
       );
+      console.log("new jobs", jobElements);
 
       const jobList = [];
       for (let i = 0; i < jobElements.length; i++) {
@@ -45,15 +57,10 @@ module.exports = (async () => {
           "div div a > div:nth-child(2)"
         ).innerText;
 
-        const min = 2600;
-        const max = 3600;
-        const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-
-        await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for the job description to load (adjust the delay as needed)
-
         jobElements[i].click(); // Click on the job
 
-        await new Promise((resolve) => setTimeout(resolve, randomNumber)); // Wait for the job description to load (adjust the delay as needed)
+        await new Promise((resolve) => setTimeout(resolve, 5300)); // Wait for the job description to load (adjust the delay as needed)
+        console.log("nu der gået mere end 10 sekunder");
 
         const jobDescriptionElement = document.querySelector(
           ".jobDescriptionContent"
@@ -68,32 +75,7 @@ module.exports = (async () => {
             ""
           ); // Fetch the job description
         } else {
-          await new Promise((resolve) => setTimeout(resolve, 20000)); // Wait for the job description to load (adjust the delay as needed)
-          const retryBtn = document.querySelector(
-            "#JDCol > div > div.css-17bh0pp.erj00if0 > button"
-          );
-          console.log("retryBtn", retryBtn);
-          if (retryBtn) {
-            retryBtn.click();
-            await new Promise((resolve) => setTimeout(resolve, randomNumber)); // Wait for the job description to load (adjust the delay as needed)
-            const jobDescriptionElement = document.querySelector(
-              ".jobDescriptionContent"
-            );
-            if (jobDescriptionElement) {
-              console.log(
-                "HER ER DER BESKRIVELSE",
-                jobDescriptionElement.innerHTML
-              );
-              job.description = jobDescriptionElement.innerHTML.replace(
-                /<[^>]*>?/gm,
-                ""
-              );
-            } else {
-              job.description = "Job description not available";
-            }
-          } else {
-            job.description = "Job description not available";
-          }
+          job.description = "Job description not available";
         }
         console.log("job", job);
         jobList.push(job);
@@ -113,18 +95,13 @@ module.exports = (async () => {
         return jobs;
       }
       const nextUrl = `https://www.glassdoor.com/Job/denmark-developer-jobs-SRCH_IL.0,7_IN63_KO8,17_IP${nextPageNumber}.htm`;
-      return jobs.concat(await getJob(nextUrl));
+      return jobs.concat(await getJob(nextUrl, true));
     }
   }
-  //const proxyServer = "2.56.119.93:5074:qcxwqldg:ixz09511pyon";
-  const browser = await puppeteer.launch({
-    headless: false,
-    timeout: 0,
-    protocolTimeout: 240000,
-  });
+
   const firstUrl =
     "https://www.glassdoor.com/Job/denmark-developer-jobs-SRCH_IL.0,7_IN63_KO8,17_IP1.htm";
-  const jobListe = await getJob(firstUrl);
+  const jobListe = await getJob(firstUrl, false);
   const success = setAsync("glassdoor", JSON.stringify(jobListe));
   console.log("jobListe", jobListe);
 
