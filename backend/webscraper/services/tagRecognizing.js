@@ -16,7 +16,7 @@ Job description: ${jobDescription}`;
 }
 
 const getTagsFromJobDescription = async (jobTitle, jobDescription) => {
-  const apiKey = "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";
+  const apiKey = process.env.OPENAI_API_KEY;
   const configuration = new Configuration({
     apiKey: apiKey,
   });
