@@ -1,7 +1,8 @@
 import axios from "axios";
+const apiEndpoint = process.env.NEXT_PUBLIC_API_ENDPOINT;
 
 const instance = axios.create({
-  baseURL: "http://localhost:3003",
+  baseURL: apiEndpoint,
 });
 
 export default instance;
