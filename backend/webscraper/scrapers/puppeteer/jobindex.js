@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer");
-const client = require(".././client/index.js");
+const client = require("../../client/index.js");
 const { promisify } = require("util");
 const setAsync = promisify(client.set).bind(client);
 
