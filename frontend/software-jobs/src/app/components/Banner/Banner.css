@@ -4,6 +4,10 @@
   background-color: white;
 }
 
+.search-input-container {
+  background-color: white;
+}
+
 .line-break {
   width: 1px;
   background-color: #cecece;
