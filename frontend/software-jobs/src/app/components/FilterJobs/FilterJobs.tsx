@@ -1,7 +1,6 @@
 "use client";
-import React from "react";
+import React, { useState, ChangeEvent, MouseEvent } from "react";
 import Form from "react-bootstrap/Form";
-import { useState } from "react";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import { AiOutlineCheck } from "react-icons/ai";
 import { SlArrowUp, SlArrowDown } from "react-icons/sl";
@@ -9,7 +8,15 @@ import { useEffect } from "react";
 import instance from "../../axios/api_instance";
 import "./FilterJobs.css";
 
-export default function FilterJobs({ filterJobs, setLoading }) {
+interface FilterJobsProps {
+  filterJobs: React.Dispatch<React.SetStateAction<any>>;
+  setLoading: (loading: boolean) => void;
+}
+
+export default function FilterJobs({
+  filterJobs,
+  setLoading,
+}: FilterJobsProps) {
   const [fullTime, setFulltime] = useState(false);
   const [partTime, setParttime] = useState(false);
   const [contract, setContract] = useState(false);
@@ -59,7 +66,10 @@ export default function FilterJobs({ filterJobs, setLoading }) {
     "Figma",
   ];
 
-  const handleSpecialtyToggle = (e, specialty) => {
+  const handleSpecialtyToggle = (
+    e: ChangeEvent<HTMLInputElement>,
+    specialty: string
+  ) => {
     const isChecked = e.currentTarget.checked;
 
     if (isChecked) {
@@ -71,7 +81,7 @@ export default function FilterJobs({ filterJobs, setLoading }) {
     }
   };
 
-  const filterList = (e) => {
+  const filterList = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const filterText = e.target.value.toLowerCase();
     filterJobs(filterText);
@@ -132,7 +142,7 @@ export default function FilterJobs({ filterJobs, setLoading }) {
           <Form.Label className="fw-bold">Filter</Form.Label>
           <Form.Control
             type="text"
-            onChange={(e) => filterList(e)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => filterList(e)}
             placeholder="Company,skill,tag..."
           />
         </Form.Group>
