@@ -16,6 +16,7 @@
 .search-input {
   border: none;
   width: 185px;
+  background-color: white;
 }
 
 .search-button {
