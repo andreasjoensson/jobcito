@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3003;
+const PORT = process.env.PORT || 3003;
 const cors = require("cors");
 const {
   getAllJobs,
