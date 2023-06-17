@@ -7,7 +7,6 @@ const {
   filterJobsByCategory,
   filterJobsByQueryParams,
 } = require("./services");
-const { getTagsFromJobDescription } = require("./services/tagRecognizing.js");
 app.use(cors());
 
 // Middleware to parse JSON data
@@ -66,6 +65,6 @@ app.get("/api/jobs/filter", async (req, res) => {
   res.json(filteredJobs);
 });
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Example app listening at http://localhost:${PORT}`);
 });
