@@ -96,7 +96,7 @@ export default function Page() {
               setMobile={setShowFilterPhone}
               setLoading={setLoading}
             />
-            <div className="filter-jobs-mobile d-flex d-block d-sm-none justify-content-evenly">
+            <div className="filter-jobs-mobile d-flex mb-3 d-block d-sm-none justify-content-evenly">
               <button
                 onClick={() => setShowFilterPhone(!showFilterPhone)}
                 className="btn custom-btn btn-outline-primary"

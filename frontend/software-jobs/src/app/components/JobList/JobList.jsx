@@ -34,6 +34,22 @@ export default function JobList({ jobs }) {
     setCurrentJobs(jobs.slice((page - 1) * 9, (page - 1) * 9 + 9));
   };
 
+  const itemsPerPage = 10; // Maximum number of pages to display
+  const totalPages = Math.ceil(pages.length / itemsPerPage); // Total number of pages
+
+  let startPage = currentPage;
+  let endPage = currentPage + itemsPerPage - 1;
+
+  /*
+  // Adjust startPage and endPage if they exceed the total number of pages
+  if (endPage > totalPages) {
+    startPage = Math.max(totalPages - itemsPerPage + 1, 1);
+    endPage = totalPages;
+  }
+  */
+
+  const displayedPages = pages.slice(startPage - 1, endPage);
+
   return (
     <div className="pe-4">
       {currentJobs.length == 0 && (
@@ -53,14 +69,13 @@ export default function JobList({ jobs }) {
           description={job.description}
         />
       ))}
-
       <Pagination className="mt-5">
-        <Pagination.Prev disabled={currentPage == 1} onClick={prevPage} />
-        {pages.map((page, i) => (
+        <Pagination.Prev disabled={currentPage === 1} onClick={prevPage} />
+        {displayedPages.map((page, i) => (
           <Pagination.Item
             key={i}
             color="#2524D1"
-            active={currentPage == page}
+            active={currentPage === page}
             onClick={() => changePage(page)}
           >
             {page}
