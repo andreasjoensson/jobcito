@@ -19,7 +19,7 @@ export default function Header() {
             width="100"
             height="46"
             className="d-inline-block align-top"
-            alt="React Bootstrap logo"
+            alt="ItJobs logo"
           />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />

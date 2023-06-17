@@ -39,7 +39,7 @@ export default function Job({
             {logo ? (
               <Image
                 src={logo}
-                alt="Firmalogo"
+                alt="Firma logo"
                 width={50}
                 height={50}
                 className="job-logo"

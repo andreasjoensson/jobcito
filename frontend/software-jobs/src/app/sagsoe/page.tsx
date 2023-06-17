@@ -28,7 +28,12 @@ export default function page() {
         <div className="container aos-init aos-animate" data-aos="fade-up">
           <div className="row gy-4">
             <div className="col-lg-6 position-relative align-self-start order-lg-last order-first">
-              <Image src={"/about.jpg"} width={546} height={409} />
+              <Image
+                src={"/about.jpg"}
+                alt="Random stock foto"
+                width={546}
+                height={409}
+              />
               <a
                 href="https://www.youtube.com/watch?v=LXb3EKWsInQ"
                 className="glightbox play-btn"
