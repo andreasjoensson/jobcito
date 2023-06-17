@@ -2,6 +2,7 @@
 import React from "react";
 import JobCard from "../JobCard/JobCard";
 import { useState } from "react";
+import "./JobList.css";
 import Pagination from "react-bootstrap/Pagination";
 
 export default function JobList({ jobs }) {

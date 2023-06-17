@@ -3,4 +3,33 @@
     display: flex;
     flex-direction: column;
   }
+
+  .job-filter-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .search-jobs-input {
+    display: flex;
+    flex-direction: column;
+  }
+  .search-input {
+    width: 100%;
+  }
+  .search-button {
+    width: 100%;
+    margin-top: 20px;
+    height: 30px;
+  }
+  .search-button-container {
+    width: 100%;
+    margin: 0px !important;
+  }
+
+  .job-container {
+    flex-direction: column;
+  }
+
+  .job-intro-container {
+    width: 100%;
+  }
 }

@@ -13,6 +13,61 @@ const getJobs = async (platform) => {
   }
 };
 
+function filterJobsByQueryParams(jobs, queryParams) {
+  const {
+    fullTime,
+    partTime,
+    contract,
+    internEmployment,
+    seniorLevel,
+    juniorLevel,
+    internLevel,
+    remote,
+    chosenSpecialties,
+  } = queryParams;
+
+  const filteredJobs = jobs.filter((job) => {
+    // Check if the job matches the time criteria
+    if (
+      (fullTime && job.tags?.time !== "full time") ||
+      (partTime && job.tags?.time !== "part-time") ||
+      (contract && job.tags?.time !== "contract") ||
+      (internEmployment && job.tags?.time !== "intern")
+    ) {
+      return false;
+    }
+
+    // Check if the job matches the seniority criteria
+    if (
+      (seniorLevel && job.tags?.seniority !== "senior") ||
+      (juniorLevel && job.tags?.seniority !== "junior") ||
+      (internLevel && job.tags?.seniority !== "intern")
+    ) {
+      return false;
+    }
+
+    // Check if the job matches the remote criteria
+    if (remote && job.tags?.remote !== true) {
+      return false;
+    }
+
+    // Check if the job matches the chosen specialties criteria
+    if (
+      chosenSpecialties.length > 0 &&
+      !chosenSpecialties.every((specialty) =>
+        job.tags?.skills?.includes(specialty)
+      )
+    ) {
+      return false;
+    }
+
+    // All criteria match, include the job in the filtered list
+    return true;
+  });
+
+  return filteredJobs;
+}
+
 const getAllJobs = async () => {
   try {
     const parsedJobindex = await getJobs("jobindexTagged");
@@ -30,26 +85,24 @@ const getAllJobs = async () => {
     throw new Error(`Failed to get all jobs: ${error.message}`);
   }
 };
-
 const getTop40Categories = async () => {
   try {
     const parsedJobindex = await getJobs("jobindexTagged");
     const parsedItJobBank = await getJobs("joblisteTagged");
     const parsedGlassDoor = await getJobs("glassdoorTagged");
 
-    const arr = parsedJobindex.concat(
-      parsedItJobBank,
-      parsedJobindex,
-      parsedGlassDoor
-    );
+    const arr = parsedJobindex.concat(parsedItJobBank, parsedGlassDoor);
 
     // Step 1: Extract skills from each job and create a single array
-    const skills = arr.flatMap((job) => job.tags.skills);
+    const skills = arr.flatMap((job) => job.tags?.skills || []);
 
     // Step 2: Count the frequency of each skill
     const skillCounts = {};
     skills.forEach((skill) => {
-      skillCounts[skill] = (skillCounts[skill] || 0) + 1;
+      if (skill !== null && skill !== undefined) {
+        const lowercaseSkill = skill.toLowerCase();
+        skillCounts[lowercaseSkill] = (skillCounts[lowercaseSkill] || 0) + 1;
+      }
     });
 
     // Step 3: Sort the skills based on frequency in descending order
@@ -58,14 +111,16 @@ const getTop40Categories = async () => {
     );
 
     // Step 4: Get the top 40 most common skills
-    const topSkills = sortedSkills.slice(0, 40).map((entry) => entry[0]);
+    const topSkills = sortedSkills
+      .slice(0, 40)
+      .map(([skill]) => skill.charAt(0).toUpperCase() + skill.slice(1));
 
+    console.log("topSkills", topSkills);
     return topSkills;
   } catch (error) {
     throw new Error(`Failed to get all jobs: ${error.message}`);
   }
 };
-
 const getUniqueJobs = async (data) => {
   const duplicatesCountMap = new Map();
   const uniqueJobList = data.reduce((accumulator, job) => {
@@ -132,9 +187,12 @@ const filterJobsByCategory = (category, jobs) => {
     return hasCategoryInTitle || hasCategoryInSkills;
   });
 
-  console.log(filteredJobs);
-
   return filteredJobs;
 };
 
-module.exports = { getAllJobs, getJobs, filterJobsByCategory };
+module.exports = {
+  getAllJobs,
+  getJobs,
+  filterJobsByCategory,
+  filterJobsByQueryParams,
+};

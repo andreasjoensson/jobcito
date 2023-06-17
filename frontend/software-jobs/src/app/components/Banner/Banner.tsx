@@ -19,7 +19,7 @@ export default function Banner({ filterByLocAndCat }: BannerProps) {
   };
 
   return (
-    <Container className="p-4 px-5" fluid={true}>
+    <Container className="p-4 " fluid={true}>
       <div className="banner mt-3">
         <h1>Find dit drømme job her!</h1>
       </div>
