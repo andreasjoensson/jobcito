@@ -12,13 +12,8 @@ export default function page() {
         <div className="container position-relative">
           <div className="row d-flex justify-content-center">
             <div className="col-lg-6 text-center">
-              <h2>Contact</h2>
-              <p>
-                Odio et unde deleniti. Deserunt numquam exercitationem. Officiis
-                quo odio sint voluptas consequatur ut a odio voluptatem. Sit
-                dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit
-                quaerat ipsum dolorem.
-              </p>
+              <h2>Kontakt</h2>
+              <p>Send en bedsked her. Jeg svarer så hurtigt jeg kan.</p>
             </div>
           </div>
         </div>
@@ -29,15 +24,11 @@ export default function page() {
           <div className="row gy-4">
             <div className="col-lg-6 position-relative align-self-start order-lg-last order-first">
               <Image
-                src={"/about.jpg"}
+                src={"/stockphoto.jpg"}
                 alt="Random stock foto"
-                width={546}
+                width={646}
                 height={409}
               />
-              <a
-                href="https://www.youtube.com/watch?v=LXb3EKWsInQ"
-                className="glightbox play-btn"
-              ></a>
             </div>
             <div className="col-lg-6 content order-last  order-lg-first">
               <h3>Ik sagsøg mig</h3>
@@ -53,13 +44,14 @@ export default function page() {
                   data-aos-delay="100"
                   className="aos-init aos-animate"
                 >
-                  <GrMoney size={70} />
                   <div>
-                    <h5>Penge</h5>
+                    <h5>Samlet på et sted</h5>
                     <p>
-                      Okay, nu til pengene. Lad os slå noget fast - jeg er ikke
-                      nogen grådig kapitalist, der svømmer i penge som Anders
-                      And.
+                      Jeg vil gerne tydeliggøre, at jeg ikke indsamler eller
+                      anvender data på ulovlige måder og at jeg ikke
+                      overbelaster de sider, hvorfra jeg indsamler
+                      joboplysninger. Formålet med min tjeneste er at give
+                      brugere en samlet oversigt over ledige job.
                     </p>
                   </div>
                 </li>
@@ -68,12 +60,13 @@ export default function page() {
                   data-aos-delay="200"
                   className="aos-init aos-animate"
                 >
-                  <i className="bi bi-fullscreen-exit"></i>
                   <div>
-                    <h5>Giv mig heads up</h5>
+                    <h5>Offentlig tilgængelighed</h5>
                     <p>
-                      Please send mig en sød bedsked på forhånd, hvor du beder
-                      mig om at lukke siden ned jeg skal nok gøre det.
+                      Alle de data, jeg indsamler, er offentligt tilgængelige og
+                      tilgængelige via de kilder, jeg henviser til. Jeg
+                      indsamler ikke personlige oplysninger om brugere uden
+                      deres samtykke.
                     </p>
                   </div>
                 </li>
@@ -82,11 +75,13 @@ export default function page() {
                   data-aos-delay="300"
                   className="aos-init aos-animate"
                 >
-                  <i className="bi bi-broadcast"></i>
                   <div>
                     <h5>Jeg sender alt traffik til jer</h5>
                     <p>
-                      Alle joblinks går direkte tilbage til jeres hjemmeside.
+                      Jeg er meget opmærksom på at respektere kildehjemmesiderne
+                      og deres ressourcer. Derfor sender jeg alt trafik tilbage
+                      til kildehjemmesiderne, når brugere ønsker at få mere
+                      information om et job eller ønsker at ansøge.
                     </p>
                   </div>
                 </li>

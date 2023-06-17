@@ -28,20 +28,6 @@ export default function Header() {
             <Nav.Link className="p-4" href="/" active={pathname === "/"}>
               Find Jobs
             </Nav.Link>
-            <Nav.Link
-              className="p-4"
-              href="/artikler"
-              active={pathname === "/artikler"}
-            >
-              Artikler
-            </Nav.Link>
-            <Nav.Link
-              className="p-4"
-              href="/kontakt"
-              active={pathname === "/kontakt"}
-            >
-              Kontakt
-            </Nav.Link>
           </Nav>
           <Nav>
             <Nav.Link
