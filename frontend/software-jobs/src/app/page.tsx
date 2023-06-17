@@ -7,6 +7,8 @@ import JobList from "./components/JobList/JobList";
 import "./page.css";
 import instance from "./axios/api_instance";
 import { useState, useEffect } from "react";
+import { AiOutlineFilter } from "react-icons/ai";
+import { AiOutlineAlert } from "react-icons/ai";
 
 interface Job {
   logo: null | string;
@@ -20,6 +22,7 @@ interface Job {
 export default function Page() {
   const [jobs, setJobs] = useState<Job[] | null>(null);
   const [isLoading, setLoading] = useState(false);
+  const [showFilterPhone, setShowFilterPhone] = useState(false);
 
   const filterJobs = async (category: string) => {
     setLoading(true);
@@ -87,7 +90,34 @@ export default function Page() {
       <div className="row jobs-container mx-auto mt-5">
         <div className="col-xs-12 col-sm-12 col-md-2">
           <div className="filter-container">
-            <FilterJobs filterJobs={setJobs} setLoading={setLoading} />
+            <FilterJobs
+              filterJobs={setJobs}
+              showMobile={showFilterPhone}
+              setMobile={setShowFilterPhone}
+              setLoading={setLoading}
+            />
+            <div className="filter-jobs-mobile d-flex d-block d-sm-none justify-content-evenly">
+              <button
+                onClick={() => setShowFilterPhone(!showFilterPhone)}
+                className="btn custom-btn btn-outline-primary"
+              >
+                {" "}
+                <AiOutlineFilter
+                  className="filter-btn-icon"
+                  color="#2725ce"
+                />{" "}
+                Filtrer jobs
+              </button>
+
+              <button className="btn custom-btn btn-outline-primary">
+                {" "}
+                <AiOutlineAlert
+                  className="filter-btn-icon"
+                  color="#2725ce"
+                />{" "}
+                Opret alarm
+              </button>
+            </div>
           </div>
         </div>
         <div className="col-xs-12 col-sm-12 col-md-10">

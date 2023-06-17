@@ -36,7 +36,9 @@ export default function JobList({ jobs }) {
 
   return (
     <div className="pe-4">
-      {currentJobs.length == 0 && <h1>Ingen jobs er fundet...</h1>}
+      {currentJobs.length == 0 && (
+        <h3 className="mt-3">Ingen jobs er fundet...</h3>
+      )}
 
       {currentJobs.map((job, i) => (
         <JobCard

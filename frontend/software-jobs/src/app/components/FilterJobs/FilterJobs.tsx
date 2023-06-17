@@ -6,16 +6,21 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { SlArrowUp, SlArrowDown } from "react-icons/sl";
 import { useEffect } from "react";
 import instance from "../../axios/api_instance";
+import { IoCloseCircleOutline } from "react-icons/io5";
 import "./FilterJobs.css";
 
 interface FilterJobsProps {
   filterJobs: React.Dispatch<React.SetStateAction<any>>;
   setLoading: (loading: boolean) => void;
+  showMobile: boolean;
+  setMobile: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function FilterJobs({
   filterJobs,
   setLoading,
+  showMobile,
+  setMobile,
 }: FilterJobsProps) {
   const [fullTime, setFulltime] = useState(false);
   const [partTime, setParttime] = useState(false);
@@ -136,7 +141,18 @@ export default function FilterJobs({
   ]);
 
   return (
-    <div className="container px-4">
+    <div
+      className={`container job-filters ${
+        showMobile ? "job-filters-mobile" : ""
+      } px-4`}
+    >
+      <div className="close-modal d-block d-sm-none d-flex justify-content-end">
+        <IoCloseCircleOutline
+          style={{ cursor: "pointer", color: "#2725CE" }}
+          size={25}
+          onClick={() => setMobile(!showMobile)}
+        />
+      </div>
       <Form>
         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
           <Form.Label className="fw-bold">Filter</Form.Label>
@@ -148,7 +164,7 @@ export default function FilterJobs({
         </Form.Group>
       </Form>
 
-      <div className="filters-job  job-filter-container">
+      <div className="filters-job job-filter-container">
         <div className="filter-container">
           <h6 className="fw-bold">
             Færdigheder
