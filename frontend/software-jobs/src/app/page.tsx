@@ -118,7 +118,7 @@ export default function Page() {
   );
 }
 
-export async function getJobs() {
+async function getJobs() {
   try {
     const response = await instance.get("/api/jobs"); // Replace with your API endpoint
     const jobs = response.data; // Assuming your API response is an array of jobs
@@ -130,7 +130,7 @@ export async function getJobs() {
   }
 }
 
-export async function getFilteredJobs(category: String) {
+async function getFilteredJobs(category: String) {
   try {
     const response = await instance.get("/api/jobs", {
       params: {
