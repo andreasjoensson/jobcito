@@ -34,18 +34,6 @@ export default function Page() {
     }
   };
 
-  const filterExistingJobs = (search: string) => {
-    const lowercaseSearch = search.toLowerCase().trim();
-    const filteredJobs = jobs.filter(
-      (job) =>
-        job.location.toLowerCase().includes(lowercaseSearch) ||
-        job.title.toLowerCase().includes(lowercaseSearch) ||
-        job.company.toLowerCase().includes(lowercaseSearch)
-    );
-    console.log("filteredJobs", filteredJobs);
-    setJobs(filteredJobs);
-  };
-
   const filterFromLocationAndCategory = async (
     location: string,
     category: string

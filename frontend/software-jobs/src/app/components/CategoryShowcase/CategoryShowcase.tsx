@@ -4,11 +4,15 @@ import "./CategoryShowcase.css";
 import Badge from "react-bootstrap/Badge";
 import { useRef, WheelEvent, useState } from "react";
 
-export default function CategoryShowcase({ filter }) {
-  const containerRef = useRef<HTMLMainElement>(null);
+export default function CategoryShowcase({
+  filter,
+}: {
+  filter: (category: string) => void;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [chosenCategory, setChosenCategory] = useState("");
 
-  const handleScroll = (evt: WheelEvent<HTMLMainElement>) => {
+  const handleScroll = (evt: WheelEvent<HTMLDivElement>) => {
     const scrollAmount = evt.deltaY;
     const container = containerRef.current;
     if (container) {
@@ -17,7 +21,7 @@ export default function CategoryShowcase({ filter }) {
   };
 
   const chooseCategory = (category: string) => {
-    if (chosenCategory == category) {
+    if (chosenCategory === category) {
       setChosenCategory("");
       filter("");
     } else {
@@ -25,7 +29,6 @@ export default function CategoryShowcase({ filter }) {
       filter(category);
     }
   };
-
   const badges = [
     "Javascript",
     "React",
