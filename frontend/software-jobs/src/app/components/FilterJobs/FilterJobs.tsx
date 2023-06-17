@@ -125,9 +125,20 @@ export default function FilterJobs({
         console.error("Error fetching jobs:", error);
       }
     };
-
-    // Call the API whenever any of the state values change
-    fetchJobs();
+    if (
+      fullTime ||
+      partTime ||
+      contract ||
+      internEmployment ||
+      seniorLevel ||
+      juniorLevel ||
+      internLevel ||
+      remote ||
+      chosenSpecialties.length > 0
+    ) {
+      // Call the API whenever any of the state values change
+      fetchJobs();
+    }
   }, [
     fullTime,
     partTime,
