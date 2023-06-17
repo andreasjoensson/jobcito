@@ -15,7 +15,7 @@ export default function Header() {
       <Container fluid={true} className="p-3 px-5">
         <Navbar.Brand className="me-3" href="/">
           <Image
-            src="/itjobs.png"
+            src="/arbejdeit.png"
             width="100"
             height="46"
             className="d-inline-block align-top"
